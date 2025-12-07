@@ -2,6 +2,24 @@
 
 Create beautiful animated code videos using [Remotion](https://remotion.dev) and [CodeHike](https://codehike.org). Perfect for tutorials, demos, and showcasing code changes.
 
+<table>
+  <tr>
+    <td>
+      <video src="https://github.com/user-attachments/assets/769f5366-d3c2-4d98-8fde-e0bd359ea1c0"
+             width="300"
+             controls>
+      </video>
+    </td>
+    <td>
+      <video src="https://github.com/user-attachments/assets/99a8ca22-64a7-449a-9a08-2da393da9c3d"
+             width="300"
+             controls>
+      </video>
+    </td>
+  </tr>
+</table>
+
+
 ## ✨ Features
 
 - 🎬 **Animated Code Transitions** - Smooth token-by-token animations between code states
