@@ -2,26 +2,21 @@
 
 !duration 180
 
-```jsx ! app/cart/actions.ts
-"use server"
+```jsx ! app/ai-sdk/chat.ts
+import { google } from '@ai-sdk/google';
+import { streamText } from 'ai';
 
-import { cart, type AddToCartState } from "@/services/cart"
-import { metrics } from "@/services/metrics"
+const model = google('gemini-2.0-flash');
 
-export async function addToCart(
-  state: AddToCartState,
-  data: FormData
-): Promise<AddToCartState> {
-  const id = data.get("id")
-  const productId = data.get("productId")
-
-  const { status, message } = await cart.add(id, productId)
-
-  // !mark[3:55] 55 50
-  await metrics.send("cart", { id, productId, status })
-
-  return { status, message }
+const stream = streamText({
+  model,
+  prompt: 'Give me a sonnet about a cat called Steven.',
+});
+// !mark[3:55] 55 50
+for await (const chunk of stream.toUIMessageStream()) {
+  console.log(chunk);
 }
+
 ```
 
 ## !!steps Terminal
@@ -31,8 +26,10 @@ export async function addToCart(
 ```tsx ! app/cart/actions.ts
 
 { type: 'start' }
+// !mark[3:55] 55 50
 { type: 'start-step' }
 { type: 'text-start', id: '0' }
+// !mark[3:55] 55 50
 { type: 'text-delta', id: '0', delta: 'With' }
 {
   type: 'text-delta',
@@ -47,5 +44,6 @@ export async function addToCart(
 // !mark[3:55] 55 50
 { type: 'text-end', id: '0' }
 { type: 'finish-step' }
+// !mark[3:55] 55 50
 { type: 'finish' }
 ```
